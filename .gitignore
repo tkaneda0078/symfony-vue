@@ -23,3 +23,4 @@ package-lock.json
 /symfony.lock
 /composer.lock
 /.env
+/.idea

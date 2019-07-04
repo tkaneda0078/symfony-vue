@@ -1,32 +1,34 @@
 <template>
-  <div>
-    <h2 class="center">My Application</h2>
-    <div v-text="message"></div>
-    <ul>
-      <li :key="word.id" v-for="word in words">{{ word }}</li>
-    </ul>
-  </div>
+  <table>
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Titlw</th>
+        <th>Count</th>
+      </tr>
+      <template v-for="movie in movies">
+        <tr v-bind:key="movie.id">
+          <td>{{ movie.id }}</td>
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.count }}</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     data() {
       return {
-        message: "A list of words",
-        words: []
-      };
+        movies: {}
+      }
     },
-    mounted() {
-      let el = document.querySelector("div[data-words]");
-      let mywords = el.dataset.words.split(",");
-
-      this.words.push.apply(this.words, mywords);
+    async created () {
+      const response = await axios.get('http://127.0.0.1:8000/movie')
+      this.movies = response.data
     }
-  };
-</script>
-
-<style>
-  .center {
-    text-align: center;
   }
-</style>
+</script>

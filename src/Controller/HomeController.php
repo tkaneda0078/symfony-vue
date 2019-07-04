@@ -12,9 +12,6 @@ class HomeController extends AbstractController
    */
   public function index()
   {
-    $words = ['sky', 'cloud', 'breeze'];
-    return $this->render('home/index.html.twig', [
-        'words' => $words
-    ]);
+    return $this->render('home/index.html.twig');
   }
 }

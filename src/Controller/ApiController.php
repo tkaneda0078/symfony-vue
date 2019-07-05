@@ -76,5 +76,17 @@ class ApiController
     return $this->setStatusCode(401)->respondWithErrors($message);
   }
 
+  /**
+   * Returns a 201 Created
+   *
+   * @param array $data
+   *
+   * @return Symfony\Component\HttpFoundation\JsonResponse
+   */
+  public function respondCreated($data = [])
+  {
+    return $this->setStatusCode(201)->respond($data);
+  }
+
 }
 

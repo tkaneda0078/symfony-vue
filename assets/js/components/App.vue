@@ -1,9 +1,10 @@
 <template>
-  <table>
-    <tbody>
+  <div>
+    <table>
+      <tbody>
       <tr>
         <th>ID</th>
-        <th>Titlw</th>
+        <th>Title</th>
         <th>Count</th>
       </tr>
       <template v-for="movie in movies">
@@ -13,14 +14,20 @@
           <td>{{ movie.count }}</td>
         </tr>
       </template>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+    <movie-form @completed="addMovie"></movie-form>
+  </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import MovieForm from './MovieForm.vue'
 
   export default {
+    components: {
+      MovieForm
+    },
     data() {
       return {
         movies: {}
@@ -29,6 +36,11 @@
     async created () {
       const response = await axios.get('http://127.0.0.1:8000/movie')
       this.movies = response.data
+    },
+    methods: {
+      addMovie(movie) {
+        this.movies.push(movie)
+      }
     }
   }
 </script>
